@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>테슬라 연말 플랜</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f1218;--card:#181e2b;--card2:#121724;--line:#283146;--text:#e9edf3;--sub:#98a3b3;--mute:#6b7688;
+--A:#4fe08f;--Ab:#10261c;--B:#8fb0ff;--Bb:#1b2234;--C:#ffc34d;--Cb:#2a2312;--D:#ff7d88;--Db:#2c1418;--gold:#ffd166}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:"Noto Sans KR",system-ui,sans-serif;font-size:15px;line-height:1.5;
+-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:20px 16px 48px}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+h1{font-size:24px;font-weight:900;letter-spacing:-.5px}
+.sub{color:var(--sub);font-size:13px}
+.price{text-align:right}
+.price b{font-size:30px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+.price .chg{font-size:13px;font-weight:700}
+.up{color:var(--A)}.dn{color:var(--D)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--A);margin-right:6px;animation:p 2s infinite}
+@keyframes p{50%{opacity:.3}}
+.card{background:var(--card);border-radius:18px;padding:18px;margin-top:14px}
+.card h2{font-size:15px;font-weight:700;color:var(--sub);margin-bottom:10px}
+.hero{border:2px solid;border-radius:20px;padding:18px 20px;margin-top:16px;display:flex;gap:16px;align-items:center}
+.hero .L{font-size:64px;font-weight:900;line-height:1}
+.hero .n{font-size:24px;font-weight:900}
+.hero .d{color:var(--text);opacity:.85;font-size:14px}
+.preview{margin-top:10px;font-size:13px;padding:8px 12px;border-radius:10px;background:var(--card2);color:var(--sub)}
+.preview b{color:var(--gold)}
+ul.todo{list-style:none}
+ul.todo li{padding:9px 0 9px 26px;position:relative;border-bottom:1px solid var(--line)}
+ul.todo li:last-child{border:0}
+ul.todo li:before{content:"";position:absolute;left:6px;top:17px;width:8px;height:8px;border-radius:2px;background:var(--acc)}
+ul.todo li.warn{color:var(--gold)}
+.num{font-variant-numeric:tabular-nums;font-weight:700}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.grid2{grid-template-columns:1fr}.price b{font-size:26px}.hero .L{font-size:52px}}
+.grid2 .card{margin-top:0}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:6px 0}
+.chk i{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:900;margin-top:1px}
+.chk i.o{background:rgba(79,224,143,.15);color:var(--A)}.chk i.x{background:rgba(255,125,136,.15);color:var(--D)}
+.lad div{display:flex;justify-content:space-between;padding:7px 10px;border-radius:8px}
+.lad div.me{background:var(--acc);color:#0b0d12;font-weight:900}
+.lad span:last-child{font-variant-numeric:tabular-nums}
+.inp{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.inp label{font-size:13px;color:var(--sub)}
+.inp input{width:100%;margin-top:4px;background:var(--card2);border:1px solid var(--line);border-radius:10px;color:var(--text);
+padding:10px 12px;font-size:17px;font-family:inherit;font-variant-numeric:tabular-nums}
+.inp input:focus{outline:2px solid var(--acc);border-color:transparent}
+.hint{font-size:12px;color:var(--mute);margin-top:8px}
+.tl{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:640px){.tl{grid-template-columns:1fr 1fr}}
+.tl div{background:var(--card2);border-radius:12px;padding:10px 12px}
+.tl b{display:block;font-size:15px}.tl span{font-size:12px;color:var(--sub)}
+.tl .done{outline:1.5px solid var(--A)}.tl .next{outline:1.5px solid var(--gold)}
+.ev div{display:flex;gap:12px;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px}
+.ev div:last-child{border:0}
+.ev time{flex:none;width:52px;color:var(--gold);font-weight:700;font-variant-numeric:tabular-nums}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:640px){.tiles{grid-template-columns:1fr 1fr}}
+.tiles div{border-radius:14px;padding:12px;border:1.5px solid var(--line);background:var(--card2);opacity:.6}
+.tiles div.on{opacity:1}
+.tiles b{display:block;font-size:15px}.tiles span{font-size:12.5px;color:var(--sub)}
+svg text{fill:var(--mute);font-size:10px;font-family:inherit}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--sub);margin-top:6px;flex-wrap:wrap}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:5px;vertical-align:middle}
+footer{margin-top:22px;color:var(--mute);font-size:12px;text-align:center;line-height:1.7}
+.err{background:var(--Db);color:var(--D);padding:12px;border-radius:12px;margin-top:14px;display:none}
+</style>
+</head>
+<body>
+<div class="wrap" id="app" style="--acc:var(--B)">
+ <header>
+  <div><h1>테슬라 연말 분할매수 플랜</h1><div class="sub" id="upd">불러오는 중…</div></div>
+  <div class="price"><div class="sub"><span class="dot"></span>TSLA 실시간 (바이낸스)</div><b id="px">—</b><div class="chg" id="chg"></div></div>
+ </header>
+ <div class="err" id="err"></div>
+
+ <div class="hero" id="hero"><div class="L" id="L">·</div><div><div class="n" id="hn">—</div><div class="d" id="hd"></div></div></div>
+ <div class="preview" id="pv"></div>
+
+ <div class="card">
+  <h2>내 예산 넣기 (이 기기에만 저장)</h2>
+  <div class="inp">
+   <label>토스 1배 분할매수 총액(원)<input id="b1" inputmode="numeric" value="10,000,000"></label>
+   <label>바이낸스 레버리지 증거금(원, 안 쓰면 0)<input id="b2" inputmode="numeric" value="0"></label>
+  </div>
+  <div class="hint">3번 나눠 사는 금액·주수, 레버리지 1/3 단계 금액이 자동 계산돼요.</div>
+ </div>
+
+ <div class="card"><h2>지금 할 일</h2><ul class="todo" id="todo"></ul></div>
+
+ <div class="grid2" style="margin-top:14px">
+  <div class="card"><h2>검증 (마지막 종가 기준)</h2><div id="chk"></div></div>
+  <div class="card"><h2>가격 위치</h2><div class="lad" id="lad"></div></div>
+ </div>
+
+ <div class="card"><h2>최근 6개월</h2><div id="chart"></div>
+  <div class="legend"><span><i style="background:#e9edf3"></i>종가</span><span><i style="background:#5b8cff"></i>20일선</span>
+  <span><i style="background:#ffc34d"></i>200일선</span><span><i style="background:#4fe08f;height:0;border-top:2px dashed #4fe08f"></i>돌파선</span></div></div>
+
+ <div class="card"><h2>분할매수 일정</h2><div class="tl" id="tl"></div></div>
+ <div class="card"><h2>다가오는 일정</h2><div class="ev" id="ev"></div></div>
+
+ <div class="card"><h2>경우의 수</h2><div class="tiles" id="tiles"></div></div>
+
+ <footer>테슬라봇이 장 마감마다 검증해서 자동으로 바뀌어요 · 가격은 바이낸스 TSLAUSDT 무기한 선물 기준<br>
+ 개인 참고용 플랜이에요. 투자 권유가 아니며 판단과 책임은 각자에게 있어요.</footer>
+</div>
+<script>
+const NAMES={A:"강한 상승",B:"박스권",C:"하락",D:"급락"};
+const DESC={A:"200일선 + 돌파선 위 → 레버리지 1/3씩",B:"20일선 ~ 200일선 사이 → 토스만",C:"20일선 아래 → 다음 회차 당겨 사기",D:"평단 −20% → 손절 없이 보유"};
+let S=null, live=null, prevClose=null;
+const $=id=>document.getElementById(id);
+const f2=x=>x==null?"—":Number(x).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+const man=x=>(Math.round(x/1e4)).toLocaleString()+"만 원";
+const md=d=>d?d.slice(5).replace("-","/"):"";
+const num=v=>Number(String(v).replace(/[^0-9.]/g,""))||0;
+function load(k,d){try{return localStorage.getItem(k)??d}catch(e){return d}}
+function save(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+$("b1").value=load("b1","10,000,000");$("b2").value=load("b2","0");
+for(const id of["b1","b2"])$(id).addEventListener("input",e=>{const n=num(e.target.value);e.target.value=n?n.toLocaleString():"0";save(id,e.target.value);render()});
+
+function classify(px,L){ // 개인 평단 없이 (D 제외)
+ if(px>L.m200&&px>L.brk)return"A"; if(px<L.m20)return"C"; return"B";}
+
+function render(){
+ if(!S)return;
+ const st=S.state,L=S.lines,px=live??S.mark??S.close,fx=S.fx;
+ const app=$("app");app.style.setProperty("--acc",`var(--${st})`);
+ const hero=$("hero");hero.style.borderColor=`var(--${st})`;hero.style.background=`var(--${st}b)`;
+ $("L").textContent=st;$("L").style.color=`var(--${st})`;$("hn").textContent=NAMES[st];$("hn").style.color=`var(--${st})`;
+ $("hd").textContent=`${md(S.day)} 종가 ${f2(S.close)} 기준 · ${md(S.since)}부터 · ${DESC[st]}`;
+ const now=classify(px,L);
+ $("pv").innerHTML=now===st||st==="D"?`지금 가격 ${f2(px)}로 마감해도 <b>${st} 유지</b>`:
+  `지금 가격 ${f2(px)}로 마감하면 <b>${st} → ${now} (${NAMES[now]})</b> 전환 — 확정은 종가 기준`;
+ // 금액
+ const b1=num($("b1").value),b2=num($("b2").value);
+ const tr=S.plan.tranches,n=tr.length||3,per=b1/n,sh=per/(px*fx);
+ const nxt=tr.find(t=>!t.bought&&t.date>=S.day)||tr.find(t=>!t.bought);
+ const unb=tr.filter(t=>!t.bought&&t.date<S.day);
+ const lv=S.lev,lm=b2/lv.total,ln=lm*lv.mult,lq=ln/(px*fx);
+ const T=[],W=[];
+ const tossNext=nxt?`토스: 다음 ${nxt.n}차(${md(nxt.date)}) <span class="num">${man(per)}</span> ≈ <span class="num">${sh.toFixed(1)}주</span>`:"토스: 3회 다 샀으면 그대로 보유";
+ const daysToEarn=S.earn?Math.round((new Date(S.earn)-new Date(S.day))/864e5):99;
+ if(st==="A"){
+  T.push(tossNext+" · 쫓아서 더 사지 않기");
+  if(b2>0){
+   if(daysToEarn>=0&&daysToEarn<=S.earn_guard)T.push(`레버리지: 실적(${md(S.earn)}) 직전이라 이번 단계는 보류`);
+   else if(lv.steps<lv.total)T.push(`레버리지 ${lv.steps}/${lv.total}단계 진행 중 · 1단계 = 증거금 <span class="num">${man(lm)}</span> × ${lv.mult}배 = <span class="num">${man(ln)}</span>어치 ≈ <span class="num">${lq.toFixed(2)}개</span>`);
+   else T.push(`레버리지 ${lv.total}단계 모두 완료 · 추가 없이 보유`);
+   T.push(`레버리지 손절: 내 레버리지 평단 −${lv.stop*100}% (지금 기준 약 ${f2(px*(1-lv.stop))})`);
+   T.push(`다음 단계는 ${lv.every}일 간격, A가 유지될 때만`);
+  }else T.push("레버리지 쓰는 경우: 위에 증거금을 넣으면 단계별 금액이 계산돼요");
+ }else if(st==="B"){
+  if(unb.length)T.push(`아직 안 샀다면 ${unb.map(t=>t.n+"차").join(", ")} 먼저: <span class="num">${man(per)}</span> ≈ <span class="num">${sh.toFixed(1)}주</span> · 120일선 ${f2(L.m120)} 근처 지정가`);
+  T.push(tossNext);
+  T.push(`레버리지: 대기 — 종가 ${f2(Math.max(L.brk,L.m200))} 위 마감하면 A (지금보다 ${((Math.max(L.brk,L.m200)/px-1)*100).toFixed(1)}%)`);
+  if(b2>0)T.push("레버리지 들고 있다면: 추가 중단, 보유 유지, −20% 손절선만 지키기");
+ }else if(st==="C"){
+  if(nxt)T.push(`토스: 다음 회차(${md(nxt.date)}) 당겨 사도 OK → <span class="num">${man(per)}</span> ≈ <span class="num">${sh.toFixed(1)}주</span>, 지정가 ${f2(S.close)} 근처`);
+  else T.push("토스: 다 샀으면 그대로 보유");
+  T.push("레버리지: 새로 넣지 않기");
+  T.push(`20일선 ${f2(L.m20)} 위로 회복하면 B로 돌아가요`);
+ }else{
+  T.push("토스: 손절 없음 · 그대로 보유");
+  if(nxt)T.push(`남은 회차(${md(nxt.date)})도 그대로 → 평단이 내려가요`);
+  T.push("레버리지: 금지 · 들고 있으면 −20% 손절선에서 정리");
+  T.push("연말에 손실이면 정리 대신 연장을 고려");
+ }
+ $("todo").innerHTML=T.map(t=>`<li>${t}</li>`).join("")+W.map(t=>`<li class="warn">${t}</li>`).join("");
+ // 검증
+ const C=[[`종가 ${f2(S.close)} > 돌파선(20일 최고) ${f2(L.brk)}`,S.close>L.brk],[`종가 > 200일선 ${f2(L.m200)}`,S.close>L.m200],[`종가 > 20일선 ${f2(L.m20)}`,S.close>L.m20]];
+ if(S.earn&&daysToEarn>=0)C.push([`실적 발표 D-${daysToEarn} (${md(S.earn)})`,daysToEarn>S.earn_guard]);
+ $("chk").innerHTML=C.map(([t,o])=>`<div class="chk"><i class="${o?"o":"x"}">${o?"✓":"✕"}</i><span>${t}</span></div>`).join("");
+ // 사다리
+ const lad=[["200일선",L.m200],["돌파선",L.brk],["120일선",L.m120],["20일선",L.m20],["지금",px]].sort((a,b)=>b[1]-a[1]);
+ $("lad").innerHTML=lad.map(([n,v])=>`<div class="${n==="지금"?"me":""}"><span>${n}</span><span>${f2(v)}</span></div>`).join("");
+ // 일정
+ $("tl").innerHTML=tr.map(t=>`<div class="${t.bought?"done":(nxt&&t.n===nxt.n?"next":"")}"><b>${t.n}차 · ${md(t.date)}</b><span>${man(per)} · ${t.bought?"매수 완료":(nxt&&t.n===nxt.n?"다음 차례":"대기")}</span></div>`).join("")
+  +`<div><b>매도 · ${md(S.plan.end)}</b><span>수익이면 정리</span></div>`;
+ $("ev").innerHTML=S.events.length?S.events.map(e=>`<div><time>${md(e.date)}</time><span>${e.name}</span></div>`).join(""):'<div><span class="sub">예정된 일정 없음</span></div>';
+ $("tiles").innerHTML=["A","B","C","D"].map(k=>`<div class="${k===st?"on":""}" style="${k===st?`border-color:var(--${k});background:var(--${k}b)`:""}"><b style="color:var(--${k})">${k} ${NAMES[k]}</b><span>${DESC[k]}</span></div>`).join("");
+ chart();
+}
+
+function chart(){
+ const h=S.hist,n=h.c.length,Wd=$("chart").clientWidth||800,H=220,p={l:8,r:44,t:10,b:20};
+ const all=[...h.c,...h.m20,...h.m200,S.lines.brk].filter(x=>x);
+ const lo=Math.min(...all)*.98,hi=Math.max(...all)*1.02;
+ const X=i=>p.l+i*(Wd-p.l-p.r)/(n-1),Y=v=>p.t+(hi-v)*(H-p.t-p.b)/(hi-lo);
+ const path=a=>a.map((v,i)=>v?`${i&&a[i-1]?"L":"M"}${X(i).toFixed(1)},${Y(v).toFixed(1)}`:"").join("");
+ let g="";for(let k=0;k<=4;k++){const v=lo+(hi-lo)*k/4;g+=`<line x1="${p.l}" x2="${Wd-p.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="#222a3a"/><text x="${Wd-p.r+6}" y="${Y(v)+3}">${v.toFixed(0)}</text>`}
+ const xl=[0,Math.floor(n/3),Math.floor(2*n/3),n-1].map(i=>`<text x="${X(i)}" y="${H-4}" text-anchor="middle">${h.d[i].replace("-","/")}</text>`).join("");
+ $("chart").innerHTML=`<svg width="100%" viewBox="0 0 ${Wd} ${H}" role="img" aria-label="테슬라 최근 6개월 종가와 이동평균선">${g}${xl}
+ <line x1="${p.l}" x2="${Wd-p.r}" y1="${Y(S.lines.brk)}" y2="${Y(S.lines.brk)}" stroke="#4fe08f" stroke-dasharray="5 4" stroke-width="1.3"/>
+ <path d="${path(h.m200)}" fill="none" stroke="#ffc34d" stroke-width="1.6"/><path d="${path(h.m20)}" fill="none" stroke="#5b8cff" stroke-width="1.6"/>
+ <path d="${path(h.c)}" fill="none" stroke="#e9edf3" stroke-width="2"/><circle cx="${X(n-1)}" cy="${Y(h.c[n-1])}" r="4" fill="#e9edf3"/></svg>`;
+}
+
+async function getStatus(){
+ try{const r=await fetch("status.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)throw 0;S=await r.json();
+  $("upd").textContent=`봇 업데이트 ${S.updated.slice(5).replace("-","/")} (한국 시간)`;$("err").style.display="none";prevClose=S.close;render();}
+ catch(e){if(!S){$("err").style.display="block";$("err").textContent="아직 봇 데이터가 없어요. 잠시 뒤 새로고침 해주세요."}}
+}
+async function getPrice(){
+ try{const r=await fetch("https://fapi.binance.com/fapi/v1/ticker/price?symbol=TSLAUSDT");const j=await r.json();live=Number(j.price);}
+ catch(e){live=null}
+ const px=live??(S&&S.mark);if(px){$("px").textContent=f2(px);
+  if(prevClose){const c=(px/prevClose-1)*100;$("chg").textContent=`종가 대비 ${c>=0?"+":""}${c.toFixed(2)}%`;$("chg").className="chg "+(c>=0?"up":"dn")}}
+ render();
+}
+getStatus().then(getPrice);setInterval(getPrice,15000);setInterval(getStatus,120000);
+addEventListener("resize",()=>S&&chart());
+</script>
+</body>
+</html>
