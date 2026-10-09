@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>테슬라 연말 플랜</title>
+<title>테슬라 투자 플랜</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -54,7 +54,7 @@ footer{margin-top:28px;color:var(--mute);font-size:12px;text-align:center;line-h
 <body>
 <div class="wrap" id="app" style="--acc:var(--B)">
  <header>
-  <div><h1>테슬라 연말 플랜</h1><div class="sub" id="upd">불러오는 중…</div></div>
+  <div><h1>테슬라 투자 플랜</h1><div class="sub" id="upd">불러오는 중…</div></div>
   <div class="price"><div class="sub">TSLA 실시간</div><b id="px">—</b><div id="chg"></div></div>
  </header>
  <div class="err" id="err"></div>
@@ -106,7 +106,8 @@ function render(){
  const tr=P.tranches,n=tr.length;
  $("rules").innerHTML=`<dt>매수</dt><dd>${n}번 나눠 사기 · 1차 ${md(tr[0]?.date)}${n>1?`, 그다음은 직전 매수가 −${pct(P.dip)} 오면 바로 (안 오면 ${tr.slice(1).map(t=>md(t.date)).join(", ")})`:""}</dd>
   <dt>보유</dt><dd>손절 없음</dd>
-  <dt>매도</dt><dd>${md(P.end)}에 점검 → 손실이면 본전 오면 매도 · 수익이면 최고 수익의 ${pct(P.giveback)}를 반납할 때 매도</dd>
+  <dt>매도</dt><dd>날짜로 팔지 않아요 · 수익이 +${pct(P.give_th)} 넘은 뒤, 그 수익의 ${pct(P.giveback)}를 반납하면 전부 매도 (손실 중엔 안 팜)</dd>
+  <dt>재매수</dt><dd>판 가격보다 −${pct(P.reentry_dip)} 내려오거나 약 3개월이 지나면 다시 ${n}분할로 시작</dd>
   <dt>레버리지</dt><dd>A일 때만 · 1/3씩 ${lv.every}일 간격 · ${lv.mult}배 · −${pct(lv.stop)} 손절</dd>`;
  const N=S.strategy||{};
  if(N.version){
@@ -122,7 +123,7 @@ function render(){
 }
 async function getStatus(){
  try{const r=await fetch("status.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)throw 0;S=await r.json();
-  S.plan.dip??=0.07;S.plan.giveback??=0.5;
+  S.plan.dip??=0.07;S.plan.giveback??=0.4;S.plan.give_th??=0.3;S.plan.reentry_dip??=0.1;
   $("upd").textContent=`업데이트 ${S.updated.slice(5).replace("-","/")}`;$("err").style.display="none";render();getPrice();}
  catch(e){if(!S){$("err").style.display="block";$("err").textContent="아직 데이터가 없어요. 잠시 뒤 새로고침 해주세요."}}
 }
