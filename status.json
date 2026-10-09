@@ -1,9 +1,9 @@
 {
- "updated": "2026-10-10 01:09",
+ "updated": "2026-10-10 01:12",
  "day": "2026-10-08",
  "close": 375.0,
- "mark": 384.22,
- "fx": 1341.2,
+ "mark": 383.81,
+ "fx": 1342.1,
  "state": "B",
  "since": "2026-10-08",
  "lines": {
@@ -36,10 +36,12 @@
     "bought": false
    }
   ],
-  "end": "2026-12-31",
+  "end": "",
   "dip": 0.07,
   "give_th": 0.3,
-  "giveback": 0.4
+  "giveback": 0.4,
+  "reentry_dip": 0.1,
+  "reentry_days": 84
  },
  "events": [
   {
