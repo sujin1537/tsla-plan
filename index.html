@@ -58,6 +58,35 @@ section{margin-top:22px}
 .inp label{font-size:12px;color:var(--sub)}
 .inp input{width:100%;margin-top:3px;background:var(--card2);border:1px solid var(--line);border-radius:10px;color:var(--text);padding:9px 11px;font-size:16px;font-family:inherit;font-variant-numeric:tabular-nums}
 .inp input:focus{outline:2px solid var(--acc);border-color:transparent}
+/* 내 매수 기록 */
+.sum{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+@media(max-width:640px){.sum{grid-template-columns:1fr 1fr}}
+.sum div{background:var(--card2);border-radius:12px;padding:10px 12px}
+.sum span{display:block;font-size:11.5px;color:var(--sub)}
+.sum b{font-size:18px;font-weight:900;font-variant-numeric:tabular-nums}
+.sum small{display:block;font-size:12px;color:var(--sub);font-variant-numeric:tabular-nums}
+.recs{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
+.recs th{font-size:11.5px;color:var(--sub);font-weight:500;text-align:right;padding:6px 4px;border-bottom:1px solid var(--line)}
+.recs th:first-child,.recs td:first-child{text-align:left}
+.recs td{text-align:right;padding:8px 4px;border-bottom:1px solid var(--line)}
+.recs td small{display:block;color:var(--sub);font-size:11.5px}
+.recs button{background:none;border:0;color:var(--mute);font-size:16px;cursor:pointer;padding:0 4px}
+.recs button:hover{color:var(--D)}
+.add{display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:8px;margin-top:12px;align-items:end}
+@media(max-width:640px){.add{grid-template-columns:1fr 1fr}.add .full,.add button{grid-column:1/-1}}
+.add label{font-size:11.5px;color:var(--sub)}
+.add input{width:100%;margin-top:3px;background:var(--card2);border:1px solid var(--line);border-radius:10px;color:var(--text);padding:9px 10px;font-size:15px;font-family:inherit;font-variant-numeric:tabular-nums;color-scheme:dark}
+.add input:focus{outline:2px solid var(--acc);border-color:transparent}
+.add button{background:var(--acc);color:#0b0d12;border:0;border-radius:10px;padding:10px 16px;font-weight:900;font-size:15px;font-family:inherit;cursor:pointer}
+.calc{margin-top:8px;font-size:13px;color:var(--sub)}.calc b{color:var(--text)}
+.next{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.next h3{font-size:13px;color:var(--sub);font-weight:700;margin-bottom:4px}
+.prog{height:8px;border-radius:4px;background:var(--card2);margin:8px 0 2px;overflow:hidden}
+.prog div{height:100%;background:var(--acc)}
+.empty{color:var(--sub);font-size:13.5px;padding:10px 0}
+.opt{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;border-top:1px solid var(--line);padding-top:12px}
+.opt label{font-size:11.5px;color:var(--sub)}
+.opt input{width:100%;margin-top:3px;background:var(--card2);border:1px solid var(--line);border-radius:8px;color:var(--text);padding:7px 9px;font-size:14px;font-family:inherit;font-variant-numeric:tabular-nums}
 ul.todo{list-style:none}
 ul.todo li{padding:9px 0 9px 24px;position:relative;border-top:1px solid var(--line)}
 ul.todo li:before{content:"";position:absolute;left:5px;top:17px;width:8px;height:8px;border-radius:2px;background:var(--acc)}
@@ -106,13 +135,20 @@ footer{margin-top:26px;color:var(--mute);font-size:12px;text-align:center;line-h
 
  <!-- ② 지금 할 일 -->
  <section>
-  <div class="sec">지금 할 일<small>내 금액 넣으면 자동 계산 · 이 기기에만 저장</small></div>
+  <div class="sec">내 매수 기록 · 할 일<small>이 기기에만 저장</small></div>
   <div class="card">
-   <div class="inp">
-    <label>일반매수(증권사·1배) 총액(원)<input id="b1" inputmode="numeric"></label>
-    <label>레버리지 증거금(원, 안 쓰면 0)<input id="b2" inputmode="numeric"></label>
+   <div class="sum" id="sum"></div>
+   <table class="recs" id="recs"></table>
+   <div class="add">
+    <label class="full">산 날짜<input type="date" id="rd"></label>
+    <label>매수가($)<input id="rp" inputmode="decimal" placeholder="예: 386.5"></label>
+    <label>수량(주)<input id="rq" inputmode="decimal" placeholder="예: 9.5"></label>
+    <button id="radd">기록</button>
    </div>
-   <ul class="todo" id="todo"></ul>
+   <div class="calc" id="rcalc">매수가와 수량을 넣으면 투자금액이 자동으로 계산돼요.</div>
+   <div class="next"><h3>다음 할 일</h3><div id="nextbox"></div><ul class="todo" id="todo"></ul></div>
+   <div class="opt"><label>일반매수 총 예산(원)<input id="b1" inputmode="numeric"></label><label>레버리지 증거금(원)<input id="b2" inputmode="numeric"></label></div>
+   <div class="calc" style="font-size:12px">기록은 이 브라우저에만 저장돼요. 다른 사람은 못 보고, 봇에도 안 올라가요. 휴대폰을 바꾸거나 기록을 지우면 사라져요.</div>
   </div>
  </section>
 
@@ -158,6 +194,18 @@ function ld(k,d){try{return localStorage.getItem(k)??d}catch(e){return d}}
 function sv(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 $("b1").value=ld("b1","10,000,000");$("b2").value=ld("b2","0");
 for(const id of["b1","b2"])$(id).addEventListener("input",e=>{const n=num(e.target.value);e.target.value=n?n.toLocaleString():"0";sv(id,e.target.value);render()});
+let REC=[];try{REC=JSON.parse(ld("recs","[]"))||[]}catch(e){REC=[]}
+const saveRec=()=>sv("recs",JSON.stringify(REC));
+const today=()=>{const d=new Date(Date.now()+9*36e5);return d.toISOString().slice(0,10)};
+$("rd").value=today();
+function calcPreview(){const p=num($("rp").value),q=num($("rq").value);if(!(p&&q&&S)){$("rcalc").textContent="매수가와 수량을 넣으면 투자금액이 자동으로 계산돼요.";return}
+ $("rcalc").innerHTML=`투자금액 <b>$${f2(p*q)}</b> ≈ <b>${Math.round(p*q*S.fx).toLocaleString()}원</b> <span style="color:var(--mute)">(환율 ${Math.round(S.fx).toLocaleString()}원 기준, 수수료 제외)</span>`}
+for(const id of["rp","rq"])$(id).addEventListener("input",calcPreview);
+$("radd").addEventListener("click",()=>{const p=num($("rp").value),q=num($("rq").value),d=$("rd").value||today();
+ if(!(p>0&&q>0)){$("rcalc").innerHTML='<span style="color:var(--D)">매수가와 수량을 모두 넣어 주세요</span>';return}
+ REC.push({d,p,q,fx:S?S.fx:0});REC.sort((a,b)=>a.d<b.d?-1:1);saveRec();$("rp").value="";$("rq").value="";calcPreview();render()});
+document.addEventListener("click",e=>{const b=e.target.closest("[data-del]");if(!b)return;const i=+b.dataset.del;
+ if(confirm(`${REC[i].d} 기록을 지울까요?`)){REC.splice(i,1);saveRec();render()}});
 const classify=(px,L)=>px>L.m200&&px>L.brk?"A":px<L.m20?"C":"B";
 
 function render(){
@@ -184,37 +232,46 @@ function render(){
   ["C","하락",`종가 ${f0(L.m20)} 아래`,"다음 회차 당겨 사기 · 레버리지 금지"],
   ["D","급락","내 평단 −20% 아래","손절 없이 보유 · 남은 회차 그대로"]];
  $("cases").innerHTML=C.map(([k,n,i,d])=>`<div class="case ${k===st?"on":""}" style="${k===st?`border-color:var(--${k});background:var(--${k}b)`:""}"><b style="color:var(--${k})">${k} ${n}</b><div class="if">${i}</div><div class="do">${d}</div>${k===st?`<span class="tag" style="background:var(--${k})">지금 여기</span>`:""}</div>`).join("");
- // 할 일
- const b1=num($("b1").value),b2=num($("b2").value),tr=P.tranches,n=tr.length||1,per=b1/n,sh=per/(px*fx);
- const nxt=tr.find(t=>!t.bought);const first=tr[0]&&!tr[0].bought;
+ // 내 기록 요약
+ const b1=num($("b1").value),b2=num($("b2").value),tr=P.tranches,n=tr.length||1;
+ const qty=REC.reduce((t,r)=>t+r.q,0),usd=REC.reduce((t,r)=>t+r.p*r.q,0),krw=REC.reduce((t,r)=>t+r.p*r.q*(r.fx||fx),0);
+ const avg=qty?usd/qty:0,val=qty*px,pnl=val-usd,pr=usd?pnl/usd:0,left=Math.max(b1-krw,0);
+ const cls=x=>x>=0?"up":"dn",sg=x=>(x>=0?"+":"")+x;
+ $("sum").innerHTML=`<div><span>투자금액</span><b>${krw?man(krw):"—"}</b><small>${usd?"$"+f2(usd):"아직 없음"}</small></div>
+  <div><span>보유 · 평단</span><b>${qty?(+qty.toFixed(4))+"주":"—"}</b><small>${avg?"평단 $"+f2(avg):""}</small></div>
+  <div><span>평가손익 (실시간)</span><b class="${qty?cls(pnl):""}">${qty?sg((pr*100).toFixed(1))+"%":"—"}</b><small>${qty?sg(Math.round(pnl*fx/1e4).toLocaleString())+"만 원":""}</small></div>
+  <div><span>남은 예산</span><b>${man(left)}</b><small>총 ${man(b1)}</small></div>`;
+ $("recs").innerHTML=REC.length?`<tr><th>날짜</th><th>매수가</th><th>수량</th><th>투자금액</th><th></th></tr>`+REC.map((r,i)=>`<tr><td>${md(r.d)}<small>${i+1}차</small></td><td>$${f2(r.p)}</td><td>${+r.q.toFixed(4)}주</td><td>$${f2(r.p*r.q)}<small>${Math.round(r.p*r.q*(r.fx||fx)/1e4).toLocaleString()}만 원</small></td><td><button data-del="${i}" aria-label="삭제">×</button></td></tr>`).join(""):`<tr><td class="empty">아직 기록이 없어요. 사면 아래에 날짜·매수가·수량을 넣어 주세요.</td></tr>`;
+ if(!$("rp").value&&document.activeElement!==$("rp"))$("rp").placeholder="지금 "+f2(px);
+ // 다음 할 일 (내 기록 기준)
+ const done=REC.length,nx=tr[done];   // 다음 회차 (내 기록 개수 기준)
+ const perLeft=nx?left/Math.max(n-done,1):0,shN=perLeft/(px*fx);
  const lv=S.lev,lm=b2/lv.total,ln=lm*lv.mult,lq=ln/(px*fx);
  const dE=S.earn?Math.round((new Date(S.earn)-new Date(S.day))/864e5):99;
- const buy=t=>`${t.n}차 <span class="num">${man(per)}</span> ≈ <span class="num">${sh.toFixed(1)}주</span>`;
- const T=[];
- if(nxt){
-  if(nxt.n===1)T.push(`일반매수 ${buy(nxt)} — ${md(nxt.date)}부터 (지정가는 현재가 +0.5% 이내)`);
-  else T.push(`일반매수 ${buy(nxt)} — 내 1차 매수가에서 −${(P.dip*100).toFixed(0)}% 오면 바로, 안 오면 ${md(nxt.date)}`);
- }else T.push("일반매수: 다 샀으면 그대로 보유 (손절 없음)");
+ let box="";const T=[];
+ if(!nx){box=`<div style="font-size:15px"><b>${n}회 다 샀어요 👏</b> 손절 없이 보유 · ${md(P.end)}에 점검</div>`;
+  if(avg){const pk=Math.max(avg,px);box+=`<div class="calc">연말 이후 매도 규칙: 손실이면 본전($${f2(avg)}) 오면 매도 · 수익이면 최고 수익의 ${(P.giveback*100).toFixed(0)}% 반납 시 매도</div>`}}
+ else if(done===0){box=`<div style="font-size:15px"><b>1차</b> · ${md(nx.date)}부터 · <span class="num">${man(perLeft)}</span> ≈ <span class="num">${shN.toFixed(1)}주</span> <span style="color:var(--sub)">(지금 $${f2(px)} 기준)</span></div><div class="calc">지정가는 현재가 +0.5% 이내로. 사고 나서 위에 기록하면 2차 알림가가 계산돼요.</div>`}
+ else{const last=REC[REC.length-1],trg=last.p*(1-P.dip),gap=px/trg-1,prog=Math.max(0,Math.min(100,(last.p-px)/(last.p-trg)*100));
+  box=`<div style="font-size:15px"><b>${done+1}차</b> · <span class="num">${man(perLeft)}</span> ≈ <span class="num">${shN.toFixed(1)}주</span></div>
+  <div class="calc">사는 때: 내 ${done}차 매수가 $${f2(last.p)}의 −${(P.dip*100).toFixed(0)}% = <b>$${f2(trg)}</b> 오면 바로${px<=trg?' — <b style="color:var(--gold)">지금 도달! 살 차례예요</b>':` (지금보다 ${(gap*100).toFixed(1)}% 아래)`} · 안 오면 <b>${md(nx.date)}</b>에</div>
+  <div class="prog"><div style="width:${prog}%"></div></div><div class="calc" style="margin-top:0">하락 알림가까지 ${prog.toFixed(0)}% 왔어요</div>`}
+ if(avg&&px<=avg*0.8)T.push(`내 평단 대비 ${((px/avg-1)*100).toFixed(0)}% — 손절 없이 보유 (D 구간), 남은 회차는 그대로`);
  if(st==="A"){
   if(b2>0){
    if(dE>=0&&dE<=S.earn_guard)T.push(`레버리지: 실적(${md(S.earn)}) 직전이라 이번 단계는 보류`);
    else if(lv.steps<lv.total)T.push(`레버리지 ${Math.max(lv.steps,1)}/${lv.total}단계: 증거금 <span class="num">${man(lm)}</span> × ${lv.mult}배 = <span class="num">${man(ln)}</span>어치 ≈ <span class="num">${lq.toFixed(2)}개</span> · 손절 평단 −${lv.stop*100}%`);
    else T.push("레버리지: 단계 모두 완료, 추가 없이 보유");
-  }else T.push("레버리지를 쓴다면 위에 증거금을 넣어 보세요");
- }else if(st==="B"){
-  T.push(`레버리지: 대기 — 종가 ${f2(aLine)} 위로 마감하면 A (지금보다 ${((aLine/px-1)*100).toFixed(1)}%)`);
-  if(first)T.push(`싸게 사고 싶다면 120일선 ${f2(L.m120)} 근처 지정가도 방법`);
- }else if(st==="C"){
-  if(nxt)T.push(`하락 구간 → ${nxt.n}차를 날짜 전에 당겨 사도 OK (지정가 ${f2(S.close)} 근처)`);
-  T.push("레버리지: 새로 넣지 않기");T.push(`20일선 ${f2(L.m20)} 위로 회복하면 B`);
- }else{T.push("레버리지: 금지 · 들고 있으면 −20% 손절선에서 정리")}
- $("todo").innerHTML=T.map(t=>`<li>${t}</li>`).join("");
+  }else T.push("A 구간: 레버리지를 쓴다면 아래 증거금 칸에 금액을 넣어 보세요");
+ }else if(st==="B")T.push(`레버리지: 대기 — 종가 ${f2(aLine)} 위로 마감하면 A (지금보다 ${((aLine/px-1)*100).toFixed(1)}%)`);
+ else if(st==="C"){if(nx)T.push(`하락 구간 → ${done+1}차를 날짜 전에 당겨 사도 OK`);T.push("레버리지: 새로 넣지 않기")}
+ $("nextbox").innerHTML=box;$("todo").innerHTML=T.map(t=>`<li>${t}</li>`).join("");
  // 플랜 규칙
  $("rules").innerHTML=`<dt>매수</dt><dd>${n}번 나눠 사기 · 1차 ${md(tr[0]?.date)}, 이후 −${(P.dip*100).toFixed(0)}% 하락 또는 정한 날짜<small>백테스트상 분할 횟수 차이는 작음 — 마음 편하게 나누는 용도</small></dd>
   <dt>보유</dt><dd>손절 없음 (1배라서 버팀)<small>평단 −20/−30/−40%에 참고 알림만</small></dd>
   <dt>매도</dt><dd>${md(P.end)} 점검 → 손실이면 본전 오면 매도, 수익이면 계속 보유하다 최고 수익의 ${(P.giveback*100).toFixed(0)}% 반납 시 매도<small>수익 +${(P.give_th*100).toFixed(0)}% 이상 찍은 뒤부터 적용</small></dd>
   <dt>레버리지</dt><dd>A일 때만, 1/3씩 ${lv.every}일 간격 · ${lv.mult}배 · 평단 −${lv.stop*100}% 손절 · 연말 정리</dd>`;
- $("tl").innerHTML=tr.map(t=>`<div class="${t.bought?"done":(nxt&&t.n===nxt.n?"next":"")}"><b>${t.n}차 · ${md(t.date)}</b><span>${t.bought?"매수 완료":(t.n>1?`−${(P.dip*100).toFixed(0)}% 오면 당김`:"다음 차례")}</span></div>`).join("")+`<div><b>점검 · ${md(P.end)}</b><span>규칙대로 매도/보유</span></div>`;
+ $("tl").innerHTML=tr.map((t,i)=>`<div class="${i<done?"done":(i===done?"next":"")}"><b>${t.n}차 · ${i<done?md(REC[i].d):md(t.date)}</b><span>${i<done?`$${f2(REC[i].p)} 매수 완료`:(i===done?"다음 차례":`−${(P.dip*100).toFixed(0)}% 오면 당김`)}</span></div>`).join("")+`<div><b>점검 · ${md(P.end)}</b><span>규칙대로 매도/보유</span></div>`;
  // 전략 노트
  const N=S.strategy||{};
  if(N.version){
