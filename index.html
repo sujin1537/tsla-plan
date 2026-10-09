@@ -8,67 +8,81 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0f1218;--card:#181e2b;--card2:#121724;--line:#283146;--text:#e9edf3;--sub:#98a3b3;--mute:#6b7688;
---A:#4fe08f;--Ab:#10261c;--B:#8fb0ff;--Bb:#1b2234;--C:#ffc34d;--Cb:#2a2312;--D:#ff7d88;--Db:#2c1418;--gold:#ffd166}
+:root{--bg:#0f1218;--card:#171d2a;--card2:#11161f;--line:#263044;--text:#e9edf3;--sub:#9aa5b5;--mute:#6b7688;
+--A:#4fe08f;--Ab:#0f2a1e;--B:#8fb0ff;--Bb:#1a2236;--C:#ffc34d;--Cb:#2c2410;--D:#ff7d88;--Db:#2e1519;--gold:#ffd166}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:"Noto Sans KR",system-ui,sans-serif;font-size:15px;line-height:1.5;
--webkit-font-smoothing:antialiased}
-.wrap{max-width:860px;margin:0 auto;padding:20px 16px 48px}
+body{background:var(--bg);color:var(--text);font-family:"Noto Sans KR",system-ui,sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:18px 16px 48px}
 header{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
-h1{font-size:24px;font-weight:900;letter-spacing:-.5px}
+h1{font-size:22px;font-weight:900;letter-spacing:-.5px}
 .sub{color:var(--sub);font-size:13px}
-.price{text-align:right}
-.price b{font-size:30px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
-.price .chg{font-size:13px;font-weight:700}
-.up{color:var(--A)}.dn{color:var(--D)}
-.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--A);margin-right:6px;animation:p 2s infinite}
-@keyframes p{50%{opacity:.3}}
-.card{background:var(--card);border-radius:18px;padding:18px;margin-top:14px}
-.card h2{font-size:15px;font-weight:700;color:var(--sub);margin-bottom:10px}
-.hero{border:2px solid;border-radius:20px;padding:18px 20px;margin-top:16px;display:flex;gap:16px;align-items:center}
-.hero .L{font-size:64px;font-weight:900;line-height:1}
-.hero .n{font-size:24px;font-weight:900}
-.hero .d{color:var(--text);opacity:.85;font-size:14px}
-.preview{margin-top:10px;font-size:13px;padding:8px 12px;border-radius:10px;background:var(--card2);color:var(--sub)}
-.preview b{color:var(--gold)}
+.price{text-align:right}.price b{font-size:28px;font-weight:900;font-variant-numeric:tabular-nums}
+.price .chg{font-size:13px;font-weight:700}.up{color:var(--A)}.dn{color:var(--D)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--A);margin-right:6px;animation:p 2s infinite}@keyframes p{50%{opacity:.3}}
+section{margin-top:22px}
+.sec{font-size:13px;font-weight:700;color:var(--sub);letter-spacing:.3px;margin:0 2px 8px;display:flex;justify-content:space-between;align-items:baseline}
+.sec small{font-weight:400;color:var(--mute)}
+.card{background:var(--card);border-radius:18px;padding:16px 18px}
+.card+.card{margin-top:12px}
+/* 1. 지금 상황 */
+.now{border:2px solid;border-radius:20px;padding:16px 18px;display:flex;gap:16px;align-items:center;margin-top:14px}
+.now .L{font-size:56px;font-weight:900;line-height:1}
+.now .n{font-size:22px;font-weight:900}.now .d{font-size:14px;opacity:.9}
+.gauge{margin-top:12px;position:relative;height:92px}
+.bar{position:absolute;top:44px;left:0;right:0;height:14px;border-radius:7px;display:flex;overflow:hidden}
+.bar div{height:100%}
+.tick{position:absolute;top:38px;width:2px;height:30px;background:#e9edf3;opacity:.5}
+.tlab{position:absolute;top:62px;transform:translateX(-50%);font-size:11.5px;color:var(--sub);white-space:nowrap;text-align:center;line-height:1.3}
+.zlab{position:absolute;top:0;transform:translateX(-50%);font-size:12px;font-weight:700;white-space:nowrap}
+.mk{position:absolute;top:40px;transform:translateX(-50%);width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:12px solid #fff;transition:left .6s}
+.mkl{position:absolute;top:20px;transform:translateX(-50%);font-size:11.5px;font-weight:900;background:#fff;color:#0b0d12;border-radius:6px;padding:0 6px;white-space:nowrap;transition:left .6s}
+.preview{margin-top:8px;font-size:13px;color:var(--sub)}.preview b{color:var(--gold)}
+/* 경우의 수 */
+.cases{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:700px){.cases{grid-template-columns:1fr 1fr}}
+.case{border-radius:14px;padding:12px;border:1.5px solid var(--line);background:var(--card2);opacity:.55;transition:.3s}
+.case.on{opacity:1;border-width:2px}
+.case b{display:block;font-size:15px}.case .if{font-size:12px;color:var(--sub);margin-top:4px}
+.case .do{font-size:13px;margin-top:6px;font-weight:500}
+.case .tag{display:inline-block;font-size:11px;font-weight:900;padding:1px 8px;border-radius:99px;margin-top:8px;color:#0b0d12}
+/* 플랜 요약 */
+.rules{display:grid;grid-template-columns:72px 1fr;gap:10px 12px;font-size:14.5px}
+.rules dt{font-weight:900;color:var(--acc)}.rules dd{color:var(--text)}
+.rules dd small{display:block;color:var(--sub);font-size:12.5px}
+.tl{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.tl div{flex:1;min-width:120px;background:var(--card2);border-radius:12px;padding:9px 12px}
+.tl b{display:block;font-size:14px}.tl span{font-size:12px;color:var(--sub)}
+.tl .done{outline:1.5px solid var(--A)}.tl .next{outline:1.5px solid var(--gold)}
+/* 할 일 */
+.inp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.inp label{font-size:12px;color:var(--sub)}
+.inp input{width:100%;margin-top:3px;background:var(--card2);border:1px solid var(--line);border-radius:10px;color:var(--text);padding:9px 11px;font-size:16px;font-family:inherit;font-variant-numeric:tabular-nums}
+.inp input:focus{outline:2px solid var(--acc);border-color:transparent}
 ul.todo{list-style:none}
-ul.todo li{padding:9px 0 9px 26px;position:relative;border-bottom:1px solid var(--line)}
-ul.todo li:last-child{border:0}
-ul.todo li:before{content:"";position:absolute;left:6px;top:17px;width:8px;height:8px;border-radius:2px;background:var(--acc)}
-ul.todo li.warn{color:var(--gold)}
+ul.todo li{padding:9px 0 9px 24px;position:relative;border-top:1px solid var(--line)}
+ul.todo li:before{content:"";position:absolute;left:5px;top:17px;width:8px;height:8px;border-radius:2px;background:var(--acc)}
 .num{font-variant-numeric:tabular-nums;font-weight:700}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media(max-width:640px){.grid2{grid-template-columns:1fr}.price b{font-size:26px}.hero .L{font-size:52px}}
-.grid2 .card{margin-top:0}
-.chk{display:flex;gap:10px;align-items:flex-start;padding:6px 0}
+/* 전략 노트 */
+.stance{display:inline-block;font-size:12px;font-weight:900;padding:2px 10px;border-radius:99px;background:var(--acc);color:#0b0d12}
+.views{display:grid;gap:8px;margin-top:12px}
+.views div{background:var(--card2);border-radius:12px;padding:10px 12px;font-size:13.5px}
+.views b{display:block;font-size:12px;color:var(--sub);margin-bottom:2px}
+.chg li{margin:4px 0 4px 18px;font-size:13.5px}
+details{margin-top:10px}summary{cursor:pointer;color:var(--sub);font-size:13px}
+/* 근거 */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.grid2{grid-template-columns:1fr}.now .L{font-size:46px}}
+.chk{display:flex;gap:10px;padding:5px 0;font-size:14px}
 .chk i{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:900;margin-top:1px}
 .chk i.o{background:rgba(79,224,143,.15);color:var(--A)}.chk i.x{background:rgba(255,125,136,.15);color:var(--D)}
-.lad div{display:flex;justify-content:space-between;padding:7px 10px;border-radius:8px}
-.lad div.me{background:var(--acc);color:#0b0d12;font-weight:900}
-.lad span:last-child{font-variant-numeric:tabular-nums}
-.inp{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.inp label{font-size:13px;color:var(--sub)}
-.inp input{width:100%;margin-top:4px;background:var(--card2);border:1px solid var(--line);border-radius:10px;color:var(--text);
-padding:10px 12px;font-size:17px;font-family:inherit;font-variant-numeric:tabular-nums}
-.inp input:focus{outline:2px solid var(--acc);border-color:transparent}
-.hint{font-size:12px;color:var(--mute);margin-top:8px}
-.tl{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-@media(max-width:640px){.tl{grid-template-columns:1fr 1fr}}
-.tl div{background:var(--card2);border-radius:12px;padding:10px 12px}
-.tl b{display:block;font-size:15px}.tl span{font-size:12px;color:var(--sub)}
-.tl .done{outline:1.5px solid var(--A)}.tl .next{outline:1.5px solid var(--gold)}
-.ev div{display:flex;gap:12px;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px}
-.ev div:last-child{border:0}
-.ev time{flex:none;width:52px;color:var(--gold);font-weight:700;font-variant-numeric:tabular-nums}
-.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-@media(max-width:640px){.tiles{grid-template-columns:1fr 1fr}}
-.tiles div{border-radius:14px;padding:12px;border:1.5px solid var(--line);background:var(--card2);opacity:.6}
-.tiles div.on{opacity:1}
-.tiles b{display:block;font-size:15px}.tiles span{font-size:12.5px;color:var(--sub)}
+.lad div{display:flex;justify-content:space-between;padding:6px 10px;border-radius:8px;font-size:14px}
+.lad div.me{background:var(--acc);color:#0b0d12;font-weight:900}.lad span:last-child{font-variant-numeric:tabular-nums}
 svg text{fill:var(--mute);font-size:10px;font-family:inherit}
 .legend{display:flex;gap:14px;font-size:12px;color:var(--sub);margin-top:6px;flex-wrap:wrap}
 .legend i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:5px;vertical-align:middle}
-footer{margin-top:22px;color:var(--mute);font-size:12px;text-align:center;line-height:1.7}
+.ev div{display:flex;gap:12px;padding:7px 0;border-top:1px solid var(--line);font-size:14px}.ev div:first-child{border:0}
+.ev time{flex:none;width:48px;color:var(--gold);font-weight:700;font-variant-numeric:tabular-nums}
+footer{margin-top:26px;color:var(--mute);font-size:12px;text-align:center;line-height:1.7}
 .err{background:var(--Db);color:var(--D);padding:12px;border-radius:12px;margin-top:14px;display:none}
 </style>
 </head>
@@ -76,146 +90,172 @@ footer{margin-top:22px;color:var(--mute);font-size:12px;text-align:center;line-h
 <div class="wrap" id="app" style="--acc:var(--B)">
  <header>
   <div><h1>테슬라 연말 분할매수 플랜</h1><div class="sub" id="upd">불러오는 중…</div></div>
-  <div class="price"><div class="sub"><span class="dot"></span>TSLA 실시간 (바이낸스)</div><b id="px">—</b><div class="chg" id="chg"></div></div>
+  <div class="price"><div class="sub"><span class="dot"></span>TSLA 실시간</div><b id="px">—</b><div class="chg" id="chg"></div></div>
  </header>
  <div class="err" id="err"></div>
 
- <div class="hero" id="hero"><div class="L" id="L">·</div><div><div class="n" id="hn">—</div><div class="d" id="hd"></div></div></div>
+ <!-- ① 지금 어디인가 + 경우의 수 -->
+ <div class="now" id="now"><div class="L" id="L">·</div><div><div class="n" id="nn">—</div><div class="d" id="nd"></div></div></div>
+ <div class="gauge" id="gauge"></div>
  <div class="preview" id="pv"></div>
 
- <div class="card">
-  <h2>내 예산 넣기 (이 기기에만 저장)</h2>
-  <div class="inp">
-   <label>일반매수(증권사·1배) 총액(원)<input id="b1" inputmode="numeric" value="10,000,000"></label>
-   <label>바이낸스 레버리지 증거금(원, 안 쓰면 0)<input id="b2" inputmode="numeric" value="0"></label>
+ <section>
+  <div class="sec">경우의 수 — 가격에 따라 대응이 이렇게 달라져요<small>종가 기준</small></div>
+  <div class="cases" id="cases"></div>
+ </section>
+
+ <!-- ② 지금 할 일 -->
+ <section>
+  <div class="sec">지금 할 일<small>내 금액 넣으면 자동 계산 · 이 기기에만 저장</small></div>
+  <div class="card">
+   <div class="inp">
+    <label>일반매수(증권사·1배) 총액(원)<input id="b1" inputmode="numeric"></label>
+    <label>레버리지 증거금(원, 안 쓰면 0)<input id="b2" inputmode="numeric"></label>
+   </div>
+   <ul class="todo" id="todo"></ul>
   </div>
-  <div class="hint">3번 나눠 사는 금액·주수, 레버리지 1/3 단계 금액이 자동 계산돼요.</div>
- </div>
+ </section>
 
- <div class="card"><h2>지금 할 일</h2><ul class="todo" id="todo"></ul></div>
+ <!-- ③ 플랜 규칙 -->
+ <section>
+  <div class="sec">플랜 한눈에</div>
+  <div class="card"><dl class="rules" id="rules"></dl><div class="tl" id="tl"></div></div>
+ </section>
 
- <div class="grid2" style="margin-top:14px">
-  <div class="card"><h2>검증 (마지막 종가 기준)</h2><div id="chk"></div></div>
-  <div class="card"><h2>가격 위치</h2><div class="lad" id="lad"></div></div>
- </div>
+ <!-- ④ 전략 노트 -->
+ <section>
+  <div class="sec">전략 노트<small id="sv"></small></div>
+  <div class="card" id="note"></div>
+ </section>
 
- <div class="card"><h2>최근 6개월</h2><div id="chart"></div>
-  <div class="legend"><span><i style="background:#e9edf3"></i>종가</span><span><i style="background:#5b8cff"></i>20일선</span>
-  <span><i style="background:#ffc34d"></i>200일선</span><span><i style="background:#4fe08f;height:0;border-top:2px dashed #4fe08f"></i>돌파선</span></div></div>
+ <!-- ⑤ 근거 -->
+ <section>
+  <div class="sec">근거<small>마지막 종가 기준</small></div>
+  <div class="grid2">
+   <div class="card"><div id="chk"></div></div>
+   <div class="card" style="margin-top:0"><div class="lad" id="lad"></div></div>
+  </div>
+  <div class="card" style="margin-top:12px"><div id="chart"></div>
+   <div class="legend"><span><i style="background:#e9edf3"></i>종가</span><span><i style="background:#5b8cff"></i>20일선</span><span><i style="background:#ffc34d"></i>200일선</span><span><i style="background:none;border-top:2px dashed #4fe08f;height:0"></i>돌파선</span></div></div>
+ </section>
 
- <div class="card"><h2>분할매수 일정</h2><div class="tl" id="tl"></div></div>
- <div class="card"><h2>다가오는 일정</h2><div class="ev" id="ev"></div></div>
+ <section><div class="sec">다가오는 일정</div><div class="card ev" id="ev"></div></section>
 
- <div class="card"><h2>경우의 수</h2><div class="tiles" id="tiles"></div></div>
-
- <footer>테슬라봇이 장 마감마다 검증해서 자동으로 바뀌어요 · 가격은 바이낸스 TSLAUSDT 무기한 선물 기준<br>
- 개인 참고용 플랜이에요. 투자 권유가 아니며 판단과 책임은 각자에게 있어요.</footer>
+ <footer>테슬라봇이 장 마감마다 검증하고, 정기 점검(차트·뉴스·정치·리포트·백테스트)으로 전략을 고쳐요.<br>
+ 가격: 바이낸스 TSLAUSDT · 개인 참고용이며 투자 권유가 아니에요. 판단과 책임은 각자에게 있어요.</footer>
 </div>
 <script>
 const NAMES={A:"강한 상승",B:"박스권",C:"하락",D:"급락"};
-const DESC={A:"200일선 + 돌파선 위 → 레버리지 1/3씩",B:"20일선 ~ 200일선 사이 → 일반매수만",C:"20일선 아래 → 다음 회차 당겨 사기",D:"평단 −20% → 손절 없이 보유"};
-let S=null, live=null, prevClose=null;
+let S=null,live=null;
 const $=id=>document.getElementById(id);
 const f2=x=>x==null?"—":Number(x).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
-const man=x=>(Math.round(x/1e4)).toLocaleString()+"만 원";
+const f0=x=>Number(x).toFixed(0);
+const man=x=>Math.round(x/1e4).toLocaleString()+"만 원";
 const md=d=>d?d.slice(5).replace("-","/"):"";
 const num=v=>Number(String(v).replace(/[^0-9.]/g,""))||0;
-function load(k,d){try{return localStorage.getItem(k)??d}catch(e){return d}}
-function save(k,v){try{localStorage.setItem(k,v)}catch(e){}}
-$("b1").value=load("b1","10,000,000");$("b2").value=load("b2","0");
-for(const id of["b1","b2"])$(id).addEventListener("input",e=>{const n=num(e.target.value);e.target.value=n?n.toLocaleString():"0";save(id,e.target.value);render()});
-
-function classify(px,L){ // 개인 평단 없이 (D 제외)
- if(px>L.m200&&px>L.brk)return"A"; if(px<L.m20)return"C"; return"B";}
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function ld(k,d){try{return localStorage.getItem(k)??d}catch(e){return d}}
+function sv(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+$("b1").value=ld("b1","10,000,000");$("b2").value=ld("b2","0");
+for(const id of["b1","b2"])$(id).addEventListener("input",e=>{const n=num(e.target.value);e.target.value=n?n.toLocaleString():"0";sv(id,e.target.value);render()});
+const classify=(px,L)=>px>L.m200&&px>L.brk?"A":px<L.m20?"C":"B";
 
 function render(){
  if(!S)return;
- const st=S.state,L=S.lines,px=live??S.mark??S.close,fx=S.fx;
- const app=$("app");app.style.setProperty("--acc",`var(--${st})`);
- const hero=$("hero");hero.style.borderColor=`var(--${st})`;hero.style.background=`var(--${st}b)`;
- $("L").textContent=st;$("L").style.color=`var(--${st})`;$("hn").textContent=NAMES[st];$("hn").style.color=`var(--${st})`;
- $("hd").textContent=`${md(S.day)} 종가 ${f2(S.close)} 기준 · ${md(S.since)}부터 · ${DESC[st]}`;
- const now=classify(px,L);
- $("pv").innerHTML=now===st||st==="D"?`지금 가격 ${f2(px)}로 마감해도 <b>${st} 유지</b>`:
-  `지금 가격 ${f2(px)}로 마감하면 <b>${st} → ${now} (${NAMES[now]})</b> 전환 — 확정은 종가 기준`;
- // 금액
- const b1=num($("b1").value),b2=num($("b2").value);
- const tr=S.plan.tranches,n=tr.length||3,per=b1/n,sh=per/(px*fx);
- const nxt=tr.find(t=>!t.bought&&t.date>=S.day)||tr.find(t=>!t.bought);
- const unb=tr.filter(t=>!t.bought&&t.date<S.day);
+ const st=S.state,L=S.lines,px=live??S.mark??S.close,fx=S.fx,P=S.plan;
+ $("app").style.setProperty("--acc",`var(--${st})`);
+ const nw=$("now");nw.style.borderColor=`var(--${st})`;nw.style.background=`var(--${st}b)`;
+ $("L").textContent=st;$("L").style.color=`var(--${st})`;$("nn").textContent=`지금은 ${NAMES[st]}`;$("nn").style.color=`var(--${st})`;
+ const meaning={A:"추세가 위로 확인됐어요. 계획대로 사고, 원하면 레버리지를 조금씩.",B:"아직 방향이 안 정해졌어요. 계획대로 일반매수만.",C:"단기적으로 밀렸어요. 싸게 살 기회 — 다음 회차를 당겨 사도 돼요.",D:"많이 빠졌어요. 팔지 말고 보유, 남은 회차는 그대로."};
+ $("nd").textContent=`${meaning[st]} (${md(S.day)} 종가 ${f2(S.close)} 기준)`;
+ // 게이지: C | B | A 구간과 현재가
+ const lo=Math.min(L.m20,px,S.close)*0.95,hi=Math.max(L.m200,L.brk,px,S.close)*1.04,pos=v=>Math.max(1,Math.min(99,(v-lo)/(hi-lo)*100));
+ const aLine=Math.max(L.m200,L.brk);
+ $("gauge").innerHTML=`<div class="bar"><div style="width:${pos(L.m20)}%;background:var(--C);opacity:.75"></div><div style="width:${pos(aLine)-pos(L.m20)}%;background:var(--B);opacity:.75"></div><div style="flex:1;background:var(--A);opacity:.75"></div></div>
+  <div class="zlab" style="left:${pos(L.m20)/2}%;color:var(--C)">C 하락</div><div class="zlab" style="left:${(pos(L.m20)+pos(aLine))/2}%;color:var(--B)">B 박스권</div><div class="zlab" style="left:${(pos(aLine)+100)/2}%;color:var(--A)">A 상승</div>
+  <div class="tick" style="left:${pos(L.m20)}%"></div><div class="tlab" style="left:${pos(L.m20)}%">20일선<br>${f0(L.m20)}</div>
+  <div class="tick" style="left:${pos(aLine)}%"></div><div class="tlab" style="left:${pos(aLine)}%">${L.m200>=L.brk?"200일선":"돌파선"}<br>${f0(aLine)}</div>
+  <div class="mk" style="left:${pos(px)}%"></div><div class="mkl" style="left:${pos(px)}%">지금 ${f2(px)}</div>`;
+ const nowS=classify(px,L);
+ $("pv").innerHTML=st==="D"?"":nowS===st?`지금 가격으로 마감해도 <b>${st} 유지</b>`:`지금 가격으로 마감하면 <b>${st} → ${nowS} 전환</b> (확정은 종가로)`;
+ // 경우의 수
+ const C=[["A","강한 상승",`종가 ${f0(aLine)} 위`,"계획대로 일반매수 + 레버리지 1/3씩"],
+  ["B","박스권",`${f0(L.m20)} ~ ${f0(aLine)}`,"계획대로 일반매수만"],
+  ["C","하락",`종가 ${f0(L.m20)} 아래`,"다음 회차 당겨 사기 · 레버리지 금지"],
+  ["D","급락","내 평단 −20% 아래","손절 없이 보유 · 남은 회차 그대로"]];
+ $("cases").innerHTML=C.map(([k,n,i,d])=>`<div class="case ${k===st?"on":""}" style="${k===st?`border-color:var(--${k});background:var(--${k}b)`:""}"><b style="color:var(--${k})">${k} ${n}</b><div class="if">${i}</div><div class="do">${d}</div>${k===st?`<span class="tag" style="background:var(--${k})">지금 여기</span>`:""}</div>`).join("");
+ // 할 일
+ const b1=num($("b1").value),b2=num($("b2").value),tr=P.tranches,n=tr.length||1,per=b1/n,sh=per/(px*fx);
+ const nxt=tr.find(t=>!t.bought);const first=tr[0]&&!tr[0].bought;
  const lv=S.lev,lm=b2/lv.total,ln=lm*lv.mult,lq=ln/(px*fx);
- const T=[],W=[];
- const tossNext=nxt?`일반매수: 다음 ${nxt.n}차(${md(nxt.date)}) <span class="num">${man(per)}</span> ≈ <span class="num">${sh.toFixed(1)}주</span>`:"일반매수: 3회 다 샀으면 그대로 보유";
- const daysToEarn=S.earn?Math.round((new Date(S.earn)-new Date(S.day))/864e5):99;
+ const dE=S.earn?Math.round((new Date(S.earn)-new Date(S.day))/864e5):99;
+ const buy=t=>`${t.n}차 <span class="num">${man(per)}</span> ≈ <span class="num">${sh.toFixed(1)}주</span>`;
+ const T=[];
+ if(nxt){
+  if(nxt.n===1)T.push(`일반매수 ${buy(nxt)} — ${md(nxt.date)}부터 (지정가는 현재가 +0.5% 이내)`);
+  else T.push(`일반매수 ${buy(nxt)} — 내 1차 매수가에서 −${(P.dip*100).toFixed(0)}% 오면 바로, 안 오면 ${md(nxt.date)}`);
+ }else T.push("일반매수: 다 샀으면 그대로 보유 (손절 없음)");
  if(st==="A"){
-  T.push(tossNext+" · 쫓아서 더 사지 않기");
   if(b2>0){
-   if(daysToEarn>=0&&daysToEarn<=S.earn_guard)T.push(`레버리지: 실적(${md(S.earn)}) 직전이라 이번 단계는 보류`);
-   else if(lv.steps<lv.total)T.push(`레버리지 ${lv.steps}/${lv.total}단계 진행 중 · 1단계 = 증거금 <span class="num">${man(lm)}</span> × ${lv.mult}배 = <span class="num">${man(ln)}</span>어치 ≈ <span class="num">${lq.toFixed(2)}개</span>`);
-   else T.push(`레버리지 ${lv.total}단계 모두 완료 · 추가 없이 보유`);
-   T.push(`레버리지 손절: 내 레버리지 평단 −${lv.stop*100}% (지금 기준 약 ${f2(px*(1-lv.stop))})`);
-   T.push(`다음 단계는 ${lv.every}일 간격, A가 유지될 때만`);
-  }else T.push("레버리지 쓰는 경우: 위에 증거금을 넣으면 단계별 금액이 계산돼요");
+   if(dE>=0&&dE<=S.earn_guard)T.push(`레버리지: 실적(${md(S.earn)}) 직전이라 이번 단계는 보류`);
+   else if(lv.steps<lv.total)T.push(`레버리지 ${Math.max(lv.steps,1)}/${lv.total}단계: 증거금 <span class="num">${man(lm)}</span> × ${lv.mult}배 = <span class="num">${man(ln)}</span>어치 ≈ <span class="num">${lq.toFixed(2)}개</span> · 손절 평단 −${lv.stop*100}%`);
+   else T.push("레버리지: 단계 모두 완료, 추가 없이 보유");
+  }else T.push("레버리지를 쓴다면 위에 증거금을 넣어 보세요");
  }else if(st==="B"){
-  if(unb.length)T.push(`아직 안 샀다면 ${unb.map(t=>t.n+"차").join(", ")} 먼저: <span class="num">${man(per)}</span> ≈ <span class="num">${sh.toFixed(1)}주</span> · 120일선 ${f2(L.m120)} 근처 지정가`);
-  T.push(tossNext);
-  T.push(`레버리지: 대기 — 종가 ${f2(Math.max(L.brk,L.m200))} 위 마감하면 A (지금보다 ${((Math.max(L.brk,L.m200)/px-1)*100).toFixed(1)}%)`);
-  if(b2>0)T.push("레버리지 들고 있다면: 추가 중단, 보유 유지, −20% 손절선만 지키기");
+  T.push(`레버리지: 대기 — 종가 ${f2(aLine)} 위로 마감하면 A (지금보다 ${((aLine/px-1)*100).toFixed(1)}%)`);
+  if(first)T.push(`싸게 사고 싶다면 120일선 ${f2(L.m120)} 근처 지정가도 방법`);
  }else if(st==="C"){
-  if(nxt)T.push(`일반매수: 다음 회차(${md(nxt.date)}) 당겨 사도 OK → <span class="num">${man(per)}</span> ≈ <span class="num">${sh.toFixed(1)}주</span>, 지정가 ${f2(S.close)} 근처`);
-  else T.push("일반매수: 다 샀으면 그대로 보유");
-  T.push("레버리지: 새로 넣지 않기");
-  T.push(`20일선 ${f2(L.m20)} 위로 회복하면 B로 돌아가요`);
- }else{
-  T.push("일반매수: 손절 없음 · 그대로 보유");
-  if(nxt)T.push(`남은 회차(${md(nxt.date)})도 그대로 → 평단이 내려가요`);
-  T.push("레버리지: 금지 · 들고 있으면 −20% 손절선에서 정리");
-  T.push("연말에 손실이면 정리 대신 연장을 고려");
- }
- $("todo").innerHTML=T.map(t=>`<li>${t}</li>`).join("")+W.map(t=>`<li class="warn">${t}</li>`).join("");
- // 검증
- const C=[[`종가 ${f2(S.close)} > 돌파선(20일 최고) ${f2(L.brk)}`,S.close>L.brk],[`종가 > 200일선 ${f2(L.m200)}`,S.close>L.m200],[`종가 > 20일선 ${f2(L.m20)}`,S.close>L.m20]];
- if(S.earn&&daysToEarn>=0)C.push([`실적 발표 D-${daysToEarn} (${md(S.earn)})`,daysToEarn>S.earn_guard]);
- $("chk").innerHTML=C.map(([t,o])=>`<div class="chk"><i class="${o?"o":"x"}">${o?"✓":"✕"}</i><span>${t}</span></div>`).join("");
- // 사다리
- const lad=[["200일선",L.m200],["돌파선",L.brk],["120일선",L.m120],["20일선",L.m20],["지금",px]].sort((a,b)=>b[1]-a[1]);
- $("lad").innerHTML=lad.map(([n,v])=>`<div class="${n==="지금"?"me":""}"><span>${n}</span><span>${f2(v)}</span></div>`).join("");
- // 일정
- $("tl").innerHTML=tr.map(t=>`<div class="${t.bought?"done":(nxt&&t.n===nxt.n?"next":"")}"><b>${t.n}차 · ${md(t.date)}</b><span>${man(per)} · ${t.bought?"매수 완료":(nxt&&t.n===nxt.n?"다음 차례":"대기")}</span></div>`).join("")
-  +`<div><b>매도 · ${md(S.plan.end)}</b><span>수익이면 정리</span></div>`;
- $("ev").innerHTML=S.events.length?S.events.map(e=>`<div><time>${md(e.date)}</time><span>${e.name}</span></div>`).join(""):'<div><span class="sub">예정된 일정 없음</span></div>';
- $("tiles").innerHTML=["A","B","C","D"].map(k=>`<div class="${k===st?"on":""}" style="${k===st?`border-color:var(--${k});background:var(--${k}b)`:""}"><b style="color:var(--${k})">${k} ${NAMES[k]}</b><span>${DESC[k]}</span></div>`).join("");
+  if(nxt)T.push(`하락 구간 → ${nxt.n}차를 날짜 전에 당겨 사도 OK (지정가 ${f2(S.close)} 근처)`);
+  T.push("레버리지: 새로 넣지 않기");T.push(`20일선 ${f2(L.m20)} 위로 회복하면 B`);
+ }else{T.push("레버리지: 금지 · 들고 있으면 −20% 손절선에서 정리")}
+ $("todo").innerHTML=T.map(t=>`<li>${t}</li>`).join("");
+ // 플랜 규칙
+ $("rules").innerHTML=`<dt>매수</dt><dd>${n}번 나눠 사기 · 1차 ${md(tr[0]?.date)}, 이후 −${(P.dip*100).toFixed(0)}% 하락 또는 정한 날짜<small>백테스트상 분할 횟수 차이는 작음 — 마음 편하게 나누는 용도</small></dd>
+  <dt>보유</dt><dd>손절 없음 (1배라서 버팀)<small>평단 −20/−30/−40%에 참고 알림만</small></dd>
+  <dt>매도</dt><dd>${md(P.end)} 점검 → 손실이면 본전 오면 매도, 수익이면 계속 보유하다 최고 수익의 ${(P.giveback*100).toFixed(0)}% 반납 시 매도<small>수익 +${(P.give_th*100).toFixed(0)}% 이상 찍은 뒤부터 적용</small></dd>
+  <dt>레버리지</dt><dd>A일 때만, 1/3씩 ${lv.every}일 간격 · ${lv.mult}배 · 평단 −${lv.stop*100}% 손절 · 연말 정리</dd>`;
+ $("tl").innerHTML=tr.map(t=>`<div class="${t.bought?"done":(nxt&&t.n===nxt.n?"next":"")}"><b>${t.n}차 · ${md(t.date)}</b><span>${t.bought?"매수 완료":(t.n>1?`−${(P.dip*100).toFixed(0)}% 오면 당김`:"다음 차례")}</span></div>`).join("")+`<div><b>점검 · ${md(P.end)}</b><span>규칙대로 매도/보유</span></div>`;
+ // 전략 노트
+ const N=S.strategy||{};
+ if(N.version){
+  $("sv").textContent=`v${N.version} · ${esc(N.updated)}`;
+  const V=N.views||{},VL={chart:"차트·기술적 분석",news:"뉴스",politics:"정치·머스크",reports:"금융권 리포트",backtest:"백테스트"};
+  $("note").innerHTML=`<span class="stance">${esc(N.stance)}</span><p style="margin-top:8px;font-size:15px">${esc(N.summary)}</p>
+   ${(N.changes||[]).length?`<div style="margin-top:10px;font-size:12px;color:var(--sub);font-weight:700">이번에 바뀐 점</div><ul class="chg">${N.changes.map(c=>`<li>${esc(c)}</li>`).join("")}</ul>`:""}
+   <details><summary>분석 의견 보기</summary><div class="views">${Object.keys(VL).filter(k=>V[k]).map(k=>`<div><b>${VL[k]}</b>${esc(V[k])}</div>`).join("")}</div>
+   ${(N.watch||[]).length?`<div style="margin-top:10px;font-size:13px"><b style="color:var(--sub);font-size:12px">다음에 볼 것</b><ul class="chg">${N.watch.map(w=>`<li>${esc(w)}</li>`).join("")}</ul></div>`:""}</details>
+   ${(N.history||[]).length?`<details><summary>지난 변경 기록 (${N.history.length})</summary><ul class="chg">${N.history.map(h=>`<li>v${esc(h.version)} ${esc(h.date)} — ${esc(h.summary)}</li>`).join("")}</ul></details>`:""}
+   ${N.next_review?`<div class="sub" style="margin-top:10px">다음 점검: ${esc(N.next_review)}</div>`:""}`;
+ }else $("note").innerHTML='<span class="sub">첫 정기 점검 뒤에 채워져요.</span>';
+ // 근거
+ const K=[[`종가 ${f2(S.close)} > 돌파선(20일 최고) ${f2(L.brk)}`,S.close>L.brk],[`종가 > 200일선 ${f2(L.m200)}`,S.close>L.m200],[`종가 > 20일선 ${f2(L.m20)}`,S.close>L.m20]];
+ if(S.earn&&dE>=0)K.push([`실적 발표 D-${dE} (${md(S.earn)})`,dE>S.earn_guard]);
+ $("chk").innerHTML=K.map(([t,o])=>`<div class="chk"><i class="${o?"o":"x"}">${o?"✓":"✕"}</i><span>${t}</span></div>`).join("");
+ $("lad").innerHTML=[["200일선",L.m200],["돌파선",L.brk],["120일선",L.m120],["20일선",L.m20],["지금",px]].sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div class="${k==="지금"?"me":""}"><span>${k}</span><span>${f2(v)}</span></div>`).join("");
+ $("ev").innerHTML=S.events.length?S.events.map(e=>`<div><time>${md(e.date)}</time><span>${esc(e.name)}</span></div>`).join(""):'<div class="sub">예정된 일정 없음</div>';
  chart();
 }
-
 function chart(){
- const h=S.hist,n=h.c.length,Wd=$("chart").clientWidth||800,H=220,p={l:8,r:44,t:10,b:20};
- const all=[...h.c,...h.m20,...h.m200,S.lines.brk].filter(x=>x);
- const lo=Math.min(...all)*.98,hi=Math.max(...all)*1.02;
- const X=i=>p.l+i*(Wd-p.l-p.r)/(n-1),Y=v=>p.t+(hi-v)*(H-p.t-p.b)/(hi-lo);
+ const h=S.hist,n=h.c.length,W=$("chart").clientWidth||760,H=210,p={l:6,r:40,t:8,b:18};
+ const all=[...h.c,...h.m20,...h.m200,S.lines.brk].filter(x=>x),lo=Math.min(...all)*.98,hi=Math.max(...all)*1.02;
+ const X=i=>p.l+i*(W-p.l-p.r)/(n-1),Y=v=>p.t+(hi-v)*(H-p.t-p.b)/(hi-lo);
  const path=a=>a.map((v,i)=>v?`${i&&a[i-1]?"L":"M"}${X(i).toFixed(1)},${Y(v).toFixed(1)}`:"").join("");
- let g="";for(let k=0;k<=4;k++){const v=lo+(hi-lo)*k/4;g+=`<line x1="${p.l}" x2="${Wd-p.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="#222a3a"/><text x="${Wd-p.r+6}" y="${Y(v)+3}">${v.toFixed(0)}</text>`}
- const xl=[0,Math.floor(n/3),Math.floor(2*n/3),n-1].map(i=>`<text x="${X(i)}" y="${H-4}" text-anchor="middle">${h.d[i].replace("-","/")}</text>`).join("");
- $("chart").innerHTML=`<svg width="100%" viewBox="0 0 ${Wd} ${H}" role="img" aria-label="테슬라 최근 6개월 종가와 이동평균선">${g}${xl}
- <line x1="${p.l}" x2="${Wd-p.r}" y1="${Y(S.lines.brk)}" y2="${Y(S.lines.brk)}" stroke="#4fe08f" stroke-dasharray="5 4" stroke-width="1.3"/>
- <path d="${path(h.m200)}" fill="none" stroke="#ffc34d" stroke-width="1.6"/><path d="${path(h.m20)}" fill="none" stroke="#5b8cff" stroke-width="1.6"/>
- <path d="${path(h.c)}" fill="none" stroke="#e9edf3" stroke-width="2"/><circle cx="${X(n-1)}" cy="${Y(h.c[n-1])}" r="4" fill="#e9edf3"/></svg>`;
+ let g="";for(let k=0;k<=4;k++){const v=lo+(hi-lo)*k/4;g+=`<line x1="${p.l}" x2="${W-p.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="#222a3a"/><text x="${W-p.r+5}" y="${Y(v)+3}">${v.toFixed(0)}</text>`}
+ const xl=[0,Math.floor(n/3),Math.floor(2*n/3),n-1].map(i=>`<text x="${X(i)}" y="${H-3}" text-anchor="middle">${h.d[i].replace("-","/")}</text>`).join("");
+ $("chart").innerHTML=`<svg width="100%" viewBox="0 0 ${W} ${H}" role="img" aria-label="최근 6개월 종가와 이동평균선">${g}${xl}<line x1="${p.l}" x2="${W-p.r}" y1="${Y(S.lines.brk)}" y2="${Y(S.lines.brk)}" stroke="#4fe08f" stroke-dasharray="5 4"/><path d="${path(h.m200)}" fill="none" stroke="#ffc34d" stroke-width="1.6"/><path d="${path(h.m20)}" fill="none" stroke="#5b8cff" stroke-width="1.6"/><path d="${path(h.c)}" fill="none" stroke="#e9edf3" stroke-width="2"/><circle cx="${X(n-1)}" cy="${Y(h.c[n-1])}" r="4" fill="#e9edf3"/></svg>`;
 }
-
 async function getStatus(){
  try{const r=await fetch("status.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)throw 0;S=await r.json();
-  $("upd").textContent=`봇 업데이트 ${S.updated.slice(5).replace("-","/")} (한국 시간)`;$("err").style.display="none";prevClose=S.close;render();}
+  if(!S.plan.dip&&S.plan.dip!==0)S.plan.dip=0.07;S.plan.give_th??=0.1;S.plan.giveback??=0.5;
+  $("upd").textContent=`봇 업데이트 ${S.updated.slice(5).replace("-","/")} (한국 시간)`;$("err").style.display="none";render();}
  catch(e){if(!S){$("err").style.display="block";$("err").textContent="아직 봇 데이터가 없어요. 잠시 뒤 새로고침 해주세요."}}
 }
 async function getPrice(){
- try{const r=await fetch("https://fapi.binance.com/fapi/v1/ticker/price?symbol=TSLAUSDT");const j=await r.json();live=Number(j.price);}
- catch(e){live=null}
- const px=live??(S&&S.mark);if(px){$("px").textContent=f2(px);
-  if(prevClose){const c=(px/prevClose-1)*100;$("chg").textContent=`종가 대비 ${c>=0?"+":""}${c.toFixed(2)}%`;$("chg").className="chg "+(c>=0?"up":"dn")}}
+ try{const r=await fetch("https://fapi.binance.com/fapi/v1/ticker/price?symbol=TSLAUSDT");live=Number((await r.json()).price)||null}catch(e){live=null}
+ const px=live??(S&&S.mark);if(px&&S){$("px").textContent=f2(px);const c=(px/S.close-1)*100;$("chg").textContent=`종가 대비 ${c>=0?"+":""}${c.toFixed(2)}%`;$("chg").className="chg "+(c>=0?"up":"dn")}
  render();
 }
-getStatus().then(getPrice);setInterval(getPrice,15000);setInterval(getStatus,120000);
-addEventListener("resize",()=>S&&chart());
+getStatus().then(getPrice);setInterval(getPrice,15000);setInterval(getStatus,120000);addEventListener("resize",()=>S&&chart());
 </script>
 </body>
 </html>
