@@ -1,1 +1,1 @@
-# tsla-paln
+# tsla-plan
