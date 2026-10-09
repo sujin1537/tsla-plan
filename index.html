@@ -86,7 +86,7 @@ footer{margin-top:22px;color:var(--mute);font-size:12px;text-align:center;line-h
  <div class="card">
   <h2>내 예산 넣기 (이 기기에만 저장)</h2>
   <div class="inp">
-   <label>토스 1배 분할매수 총액(원)<input id="b1" inputmode="numeric" value="10,000,000"></label>
+   <label>일반매수(증권사·1배) 총액(원)<input id="b1" inputmode="numeric" value="10,000,000"></label>
    <label>바이낸스 레버리지 증거금(원, 안 쓰면 0)<input id="b2" inputmode="numeric" value="0"></label>
   </div>
   <div class="hint">3번 나눠 사는 금액·주수, 레버리지 1/3 단계 금액이 자동 계산돼요.</div>
@@ -113,7 +113,7 @@ footer{margin-top:22px;color:var(--mute);font-size:12px;text-align:center;line-h
 </div>
 <script>
 const NAMES={A:"강한 상승",B:"박스권",C:"하락",D:"급락"};
-const DESC={A:"200일선 + 돌파선 위 → 레버리지 1/3씩",B:"20일선 ~ 200일선 사이 → 토스만",C:"20일선 아래 → 다음 회차 당겨 사기",D:"평단 −20% → 손절 없이 보유"};
+const DESC={A:"200일선 + 돌파선 위 → 레버리지 1/3씩",B:"20일선 ~ 200일선 사이 → 일반매수만",C:"20일선 아래 → 다음 회차 당겨 사기",D:"평단 −20% → 손절 없이 보유"};
 let S=null, live=null, prevClose=null;
 const $=id=>document.getElementById(id);
 const f2=x=>x==null?"—":Number(x).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
@@ -145,7 +145,7 @@ function render(){
  const unb=tr.filter(t=>!t.bought&&t.date<S.day);
  const lv=S.lev,lm=b2/lv.total,ln=lm*lv.mult,lq=ln/(px*fx);
  const T=[],W=[];
- const tossNext=nxt?`토스: 다음 ${nxt.n}차(${md(nxt.date)}) <span class="num">${man(per)}</span> ≈ <span class="num">${sh.toFixed(1)}주</span>`:"토스: 3회 다 샀으면 그대로 보유";
+ const tossNext=nxt?`일반매수: 다음 ${nxt.n}차(${md(nxt.date)}) <span class="num">${man(per)}</span> ≈ <span class="num">${sh.toFixed(1)}주</span>`:"일반매수: 3회 다 샀으면 그대로 보유";
  const daysToEarn=S.earn?Math.round((new Date(S.earn)-new Date(S.day))/864e5):99;
  if(st==="A"){
   T.push(tossNext+" · 쫓아서 더 사지 않기");
@@ -162,12 +162,12 @@ function render(){
   T.push(`레버리지: 대기 — 종가 ${f2(Math.max(L.brk,L.m200))} 위 마감하면 A (지금보다 ${((Math.max(L.brk,L.m200)/px-1)*100).toFixed(1)}%)`);
   if(b2>0)T.push("레버리지 들고 있다면: 추가 중단, 보유 유지, −20% 손절선만 지키기");
  }else if(st==="C"){
-  if(nxt)T.push(`토스: 다음 회차(${md(nxt.date)}) 당겨 사도 OK → <span class="num">${man(per)}</span> ≈ <span class="num">${sh.toFixed(1)}주</span>, 지정가 ${f2(S.close)} 근처`);
-  else T.push("토스: 다 샀으면 그대로 보유");
+  if(nxt)T.push(`일반매수: 다음 회차(${md(nxt.date)}) 당겨 사도 OK → <span class="num">${man(per)}</span> ≈ <span class="num">${sh.toFixed(1)}주</span>, 지정가 ${f2(S.close)} 근처`);
+  else T.push("일반매수: 다 샀으면 그대로 보유");
   T.push("레버리지: 새로 넣지 않기");
   T.push(`20일선 ${f2(L.m20)} 위로 회복하면 B로 돌아가요`);
  }else{
-  T.push("토스: 손절 없음 · 그대로 보유");
+  T.push("일반매수: 손절 없음 · 그대로 보유");
   if(nxt)T.push(`남은 회차(${md(nxt.date)})도 그대로 → 평단이 내려가요`);
   T.push("레버리지: 금지 · 들고 있으면 −20% 손절선에서 정리");
   T.push("연말에 손실이면 정리 대신 연장을 고려");
